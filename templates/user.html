@@ -1,0 +1,287 @@
+{% extends "layout.html" %} {% block title %} User {% endblock %} {% block main %}
+
+<div class="container">
+  <div class="main-body">
+    <div class="row gutters-sm">
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            {% if user[0]['gender'] == 'F' %}
+            <img src="/static/images/females/ifemale.png" alt="profile image" class="rounded-circle" width="150"> {% else %}
+            <img src="/static/images/males/imale.png" alt="profile image" class="rounded-circle" width="150"> {% endif %}
+            <div class="mt-3">
+              <h4 class="d-flex justify-content-around">
+                <span>{{ user[0]['username'] }}</span>
+                <span>{{ age }} </span>
+              </h4>
+            </div>
+
+            <div class="d-flex justify-content-around">
+              {% if sessionUser[0]['userID'] == user[0]["userID"] %}
+              <div>
+                <button class="btn btn-danger" style="background-color: white; color: red" data-toggle="tooltip" data-placement="top" title="Can't like yourself">Like</button>
+              </div>
+              <div>
+                <button class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="top" title="Can't message yourself">Message</button>
+              </div>
+
+              {% else %} {% if blength != 0 %}
+              <div>
+                <div class="block">Blocked </div>
+              </div>
+              {% else %}
+              <div>
+                {% if liked == true %}
+                <a href="{{ url_for('userProfileAction', userID=user[0]['userID'] , action='unlike') }} ">
+                    <button class="btn btn-info" style="background-color: red; color: white">UnLike </button>
+                </a> {% else %}
+                <a href=" {{ url_for('userProfileAction', userID=user[0]['userID'] , action='like') }} ">
+                    <button class="btn btn-info" style="background-color: white; color: blue">Like </button>
+                </a> {% endif %}
+                {% if sessionUser[0]['membership'] == 'basic' %}
+                <a href="{{ url_for('messageSend', userID=user[0]['userID'], membership='basic') }} ">
+                  <button class="btn btn-outline-primary" id="msg" >Message</button>
+                </a>
+                {% elif sessionUser[0]['membership'] == 'gold' %}
+                <a href="{{ url_for('messageSend', userID=user[0]['userID'], membership='gold') }} ">
+                  <button class="btn btn-outline-primary" id="msg" onclick="reminder{{ sessionUser[0]['profileMsg'], user[0]['profileMsg'] }}">Message</button>
+                </a>
+               {% endif %}
+              </div>
+              {% endif %}{% endif %}
+            </div>
+          </div>
+        </div>
+
+        <div class="card mt-3">
+          <ul class="list-group list-group-flush ">
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+              <h6 class="mb-0">My Profession</h6><span class="text-secondary">{{ user[1]['profession'] }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+              <h6 class="mb-0">Marital Status</h6><span class="text-secondary">{{ user[1]['marriageStatus'] }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+              <h6 class="mb-0">City/State</h6><span class="text-secondary">{{ user[2]['city'] }}, {{ user[2]['state'] }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+              <h6 class="mb-0">Country</h6><span class="text-secondary">{{ user[2]['country'] }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+              <h6 class="mb-0">Registration </h6><span class="text-secondary">{{ user[0]['reason'] }}</span>
+            </li>
+          </ul>
+          <div class="grid-container contentshare ">
+
+            {% if sessionUser[0]['userID'] == user[0]["userID"] %}
+            <div>
+              <a class="btn icon-btn btn-danger togetherbutton">Report</a>
+            </div>
+            <div>
+              <a class="btn icon-btn btn-danger togetherbutton">Block</a>
+            </div>
+            {% else %}
+            <div>
+              <a class="btn  btn-danger togetherbutton" href="{{ url_for('report', username = user[0]['username']) }}">Report</a>
+            </div>
+            {% if blocked == True %}
+            <div>
+              <a class="btn icon-btn btn-danger togetherbutton" href=" {{ url_for('userProfileAction', userID=user[0]['userID'] , action='unblock') }} ">Unblock </a>
+            </div>
+            {% else %}
+            <div>
+              <a class="btn icon-btn btn-danger togetherbutton" href=" {{ url_for('userProfileAction', userID=user[0]['userID'] , action='block') }} ">Block </a>
+            </div>
+            {% endif %} {% endif %}
+          </div>
+        </div>
+      </div>
+
+      {% if user[0]['gender'] == 'F' %}
+      <div class="col-md-8" style="color: #AD057F">
+        {% else %}
+        <div class="col-md-8" style="color: #007EA5">
+          {% endif %}
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12 text-left ">
+                  <h5 class="d-flex align-items-center mb-3">A Little Bit About Me</h5>
+                  <span class="text-secondary show-more ">
+                  {{ user[1]['aboutMe'] }}
+                </span>
+                </div>
+              </div>
+              <p></p>
+              <div class="row">
+                <div class="col-md-12 text-left">
+                  <h5 class="d-flex align-items-center mb-3">What I Am Looking For</h5>
+                  <span class="text-secondary show-more">
+                  {{ user[1]['lookingFor'] }}
+                </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12 card mb-3">
+            <div class="card-body">
+              <h5 class="d-flex align-items-center mb-3">Personal Information</h5>
+              <div class="bio-row d-flex justify-content-between align-items-center flex-wrap">
+                <div class="font-size-class-header">Citizenship</div>
+                <div class="font-size-class text-secondary">{{ user[1]['citizenship'] }}</div>
+              </div>
+              <div class="bio-row d-flex justify-content-between align-items-center flex-wrap">
+                <div class="font-size-class-header">Country of Origin</div>
+                <div class="font-size-class text-secondary">{{ user[1]['origin'] }}</div>
+              </div>
+              <div class="bio-row d-flex justify-content-between align-items-center flex-wrap">
+                <div class="font-size-class-header">Willing to Relocate?</div>
+                <div class="font-size-class text-secondary">{{ user[1]['relocation'] }}</div>
+              </div>
+              <div class="bio-row d-flex justify-content-between align-items-center flex-wrap">
+                <div class="font-size-class-header">I am Looking to Marry</div>
+                <div class="font-size-class text-secondary">{{ user[1]['timeframe'] }}</div>
+              </div>
+              <div class="bio-row d-flex justify-content-between align-items-center flex-wrap">
+                <div class="font-size-class-header">My Income</div>
+                <div class="font-size-class text-secondary">{{ user[1]['income'] }}</div>
+              </div>
+              <div class="bio-row d-flex justify-content-between align-items-center flex-wrap">
+                <div class="font-size-class-header">Marital Status</div>
+                <div class="font-size-class text-secondary">{{ user[1]['marriageStatus'] }}</div>
+              </div>
+              <div class="bio-row d-flex justify-content-between align-items-center flex-wrap">
+                <div class="font-size-class-header">Would I like to have Children?</div>
+                <div class="font-size-class text-secondary">{{ user[1]['wantChildren'] }}</div>
+              </div>
+              <div class="bio-row d-flex justify-content-between align-items-center flex-wrap">
+                <div class="font-size-class-header">Do I have children?</div>
+                <div class="font-size-class text-secondary">{{ user[1]['haveChildren'] }}</div>
+              </div>
+              <div class="bio-row d-flex justify-content-between align-items-center flex-wrap">
+                <div class="font-size-class-header">My Living Arrangements?</div>
+                <div class="font-size-class text-secondary">{{ user[1]['livingArrangements'] }}</div>
+              </div>
+              <div class="bio-row d-flex justify-content-between align-items-center flex-wrap">
+                <div class="font-size-class-header">Country</div>
+                <div class="font-size-class text-secondary">{{ user[2]['country'] }}</div>
+              </div>
+              <div class="bio-row d-flex justify-content-between align-items-center flex-wrap">
+                <div class="font-size-class-header">City/State</div>
+                <div class="font-size-class text-secondary">{{ user[2]['city'] }}, {{ user[2]['state'] }}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12 card mb-3">
+            <div class="card-body">
+              <h5 class="d-flex align-items-center mb-3">Appearance</h5>
+              <div class="bio-row d-flex justify-content-between align-items-center flex-wrap">
+                <div class="font-size-class-header">My Height</div>
+                <div class="font-size-class text-secondary">{{ (user[1]['height'] / 12) |int }}'{{ user[1]['height'] % 12 }}</div>
+              </div>
+              <div class="bio-row d-flex justify-content-between align-items-center flex-wrap">
+                <div class="font-size-class-header">My Build</div>
+                <div class="font-size-class text-secondary">{{ user[1]['build'] }}</div>
+              </div>
+              <div class="bio-row d-flex justify-content-between align-items-center flex-wrap">
+                <div class="font-size-class-header">Do I Smoke?</div>
+                <div class="font-size-class text-secondary">{{ user[1]['smoke'] }}</div>
+              </div>
+              <div class="bio-row d-flex justify-content-between align-items-center flex-wrap">
+                <div class="font-size-class-header">Do I Have Any Disabilities?</div>
+                <div class="font-size-class text-secondary">{{ user[1]['disabilities'] }} </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12 card mb-3">
+            <div class="card-body">
+              <h5 class="d-flex align-items-center mb-3">Education & Profession</h5>
+              <div class="bio-row d-flex justify-content-between align-items-center flex-wrap">
+                <div class="font-size-class-header">My Education Level</div>
+                <div class="font-size-class text-secondary">{{ user[1]['education'] }}</div>
+              </div>
+              <div class="bio-row d-flex justify-content-between align-items-center flex-wrap">
+                <div class="font-size-class-header">My Profession</div>
+                <div class="font-size-class text-secondary">{{ user[1]['profession'] }}</div>
+              </div>
+              <div class="bio-row d-flex justify-content-between align-items-center flex-wrap">
+                <div class="font-size-class-header">My Job Title</div>
+                <div class="font-size-class text-secondary">{{ user[1]['jobTitle'] }}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12 card mb-3">
+            <div class="card-body">
+              <h5 class="d-flex align-items-center mb-3">Preference</h5>
+              <div class="bio-row d-flex justify-content-between align-items-center flex-wrap">
+                <div class="font-size-class-header">Age</div>
+                <div class="font-size-class text-secondary">{{ user[3]['age'] }}</div>
+              </div>
+              <div class="bio-row d-flex justify-content-between align-items-center flex-wrap">
+                <div class="font-size-class-header">Height</div>
+                <div class="font-size-class text-secondary">
+                  {% set n1, n2 = user[3]['height'].split('-') %} {{ ((n1|int)/12) |int }}'{{ ((n1|int)%12) }} - {{ ((n2|int)/12) |int }}'{{ ((n2|int)%12) }} </div>
+              </div>
+              <div class="bio-row d-flex justify-content-between align-items-center flex-wrap">
+                <div class="font-size-class-header">Country</div>
+                <div class="font-size-class text-secondary">{{ user[3]['country'] }}</div>
+              </div>
+              <div class="bio-row d-flex justify-content-between align-items-center flex-wrap">
+                <div class="font-size-class-header">Education</div>
+                <div class="font-size-class text-secondary">{{ user[3]['education'] }}</div>
+              </div>
+              <div class="bio-row d-flex justify-content-between align-items-center flex-wrap">
+                <div class="font-size-class-header">Marital Status</div>
+                <div class="font-size-class text-secondary">{{ user[3]['maritalStatus'] }}</div>
+              </div>
+              <div class="bio-row d-flex justify-content-between align-items-center flex-wrap">
+                <div class="font-size-class-header">Income</div>
+                <div class="font-size-class text-secondary">{{ user[3]['income'] }}</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    var showChar = 200;
+    var ellipsestext = "...";
+    var moretext = "See More";
+    var lesstext = "See Less";
+    $('.show-more').each(function() {
+      var content = $(this).html();
+      if (content.length > showChar) {
+        var show_content = content.substr(0, showChar);
+        var hide_content = content.substr(showChar, content.length - showChar);
+        var html = show_content + '<span class="moreelipses">' + ellipsestext + '</span><span class="remaining-content"><span>' + hide_content + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+        $(this).html(html);
+      }
+    });
+
+    $(".morelink").click(function() {
+      if ($(this).hasClass("less")) {
+        $(this).removeClass("less");
+        $(this).html(moretext);
+      }
+      else {
+        $(this).addClass("less");
+        $(this).html(lesstext);
+      }
+      $(this).parent().prev().toggle();
+      $(this).prev().toggle();
+      return false;
+    });
+
+  </script>
+
+
+  {% endblock %}

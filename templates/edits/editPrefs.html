@@ -1,0 +1,116 @@
+{% extends "shared/editlayout.html" %} {% block title %} Edit Preference {% endblock %} {% block edit %}
+
+
+<div class="col-9">
+    <div class="row">
+        <div class="col-md-12 register-form mx-auto">
+            <h4>Partner Preference</h4>
+
+            <form action="/preference" method="post" id="preference">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Age</span>
+                    </div>
+                    {% set ageSet = prefs[0]["age"].split(' - ') %}
+                    <input type="number" class="form-control" name="ageFrom" value="{{ ageSet[0] }}" min="18" max="80">
+                    <input type="number" class="form-control" name="ageTo" value="{{ ageSet[1] }}" min="18" max="80">
+                </div>
+                <div class="input-group mb-3">
+                    {% set htSet = prefs[0]["height"].split(' - ') %}
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Height</span></span>
+                    </div>
+                    <select name="heightFrom" class="form-control">
+                        <option value="{{ htSet[0] }}" selected>{{ (htSet[0]|int/12)|int }}'{{ (htSet[0]|int )%12 }}"</option>
+                        <option value="60">5' 0" (1.52m)</option>
+                        <option value="61">5' 1" (1.55m)</option>
+                        <option value="62">5' 2" (1.57m)</option>
+                        <option value="63">5' 3" (1.60m)</option>
+                        <option value="64">5' 4" (1.63m)</option>
+                        <option value="65">5' 5" (1.65m)</option>
+                        <option value="66">5' 6" (1.68m)</option>
+                        <option value="67">5' 7" (1.70m)</option>
+                        <option value="68">5' 8" (1.73m)</option>
+                        <option value="69">5' 9" (1.75m)</option>
+                        <option value="70">5' 10" (1.78m)</option>
+                        <option value="71">5' 11" (1.80m)</option>
+                        <option value="72">6' 0" (1.83m)</option>
+                        <option value="73">6' 1" (1.85m)</option>
+                        <option value="74">6' 2" (1.88m)</option>
+                        <option value="75">6' 3" (1.91m)</option>
+                        <option value="76">6' 4" (1.93m)</option>
+                        <option value="77">6' 5" (1.96m)</option>
+                        <option value="78">6' 6" (1.98m)</option>
+                        <option value="79">6' 7" (2.01m)</option>
+                        <option value="80">6' 8" (2.03m)</option>
+                        <option value="81">6' 9" (2.06m)</option>
+                        <option value="82">6' 10" (2.08m)</option>
+                        <option value="83">6' 11" (2.11m)</option>
+                    </select>
+                    <select name="heightTo" class="form-control">
+                      <option value="{{ htSet[1] }}" selected>{{ (htSet[1]|int/12)|int }}'{{ (htSet[1]|int )%12 }}"</option>
+                      <option value="60">5' 0" (1.52m)</option>
+                      <option value="61">5' 1" (1.55m)</option>
+                      <option value="62">5' 2" (1.57m)</option>
+                      <option value="63">5' 3" (1.60m)</option>
+                      <option value="64">5' 4" (1.63m)</option>
+                      <option value="65">5' 5" (1.65m)</option>
+                      <option value="66">5' 6" (1.68m)</option>
+                      <option value="67">5' 7" (1.70m)</option>
+                      <option value="68">5' 8" (1.73m)</option>
+                      <option value="69">5' 9" (1.75m)</option>
+                      <option value="70">5' 10" (1.78m)</option>
+                      <option value="71">5' 11" (1.80m)</option>
+                      <option value="72">6' 0" (1.83m)</option>
+                      <option value="73">6' 1" (1.85m)</option>
+                      <option value="74">6' 2" (1.88m)</option>
+                      <option value="75">6' 3" (1.91m)</option>
+                      <option value="76">6' 4" (1.93m)</option>
+                      <option value="77">6' 5" (1.96m)</option>
+                      <option value="78">6' 6" (1.98m)</option>
+                      <option value="79">6' 7" (2.01m)</option>
+                      <option value="80">6' 8" (2.03m)</option>
+                      <option value="81">6' 9" (2.06m)</option>
+                      <option value="82">6' 10" (2.08m)</option>
+                      <option value="83">6' 11" (2.11m)</option>
+                    </select>
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Education</span>
+                    </div>
+                    <input class="form-control" type="text" name="education" value="{{ prefs[0]['education'] }}" placeholder="Education">
+                </div>
+
+                <div class="input-group mb-3 ">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Marriage Status</span>
+                    </div>
+                    <input class="form-control d-flex" type="text" name="marriage" value="{{ prefs[0]['maritalStatus'] }}" placeholder="Marriage Status">
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Income</span>
+                    </div>
+                    <input class="form-control" type="text" name="income" value="{{ prefs[0]['income'] }}" placeholder="Income level">
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Country</span>
+                    </div>
+                    <input class="form-control" type="text" name="country" value="{{ prefs[0]['country'] }}" placeholder="Country">
+                </div>
+
+                <div class="form-group" align="left">
+                    <button class="btn btnSubmit" type="submit">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

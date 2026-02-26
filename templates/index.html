@@ -1,0 +1,285 @@
+{% extends "layout.html" %} {% block title %} Home {% endblock %} {% block main %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <a href="myPhotos">
+            <img src="/static/images/viewgal.jpg" alt="profile img" class="rounded-circle" width="150"><br>
+          </a>
+          <div class="user-controls d-flex ">
+            <div class="pading-box center-align button2 float-left ">
+              <a href="myLikes" data-mdb-toggle="tooltip" title="My Likes" style="font-size:13px">
+                <span class="material-icons">favorite</span><br>My Likes
+                <!--<div class="material-icons">favorite_border</div><br>My Likes-->
+                <!--<span class="heart-shape"></span><br>My Likes-->
+                </a>
+            </div>
+            <div class="pading-box center-align button2 float-left ">
+              <a href={{ url_for( 'userProfile', username=me[0]['username']) }} data-mdb-toggle="tooltip" title="View Profile" style="font-size:13px">
+                <span class="material-icons">account_circle</span><br>My Profile
+              </a>
+            </div>
+            <div class="pading-box center-align button2 float-left">
+              <a href="userPreference" data-mdb-toggle="tooltip" title="My Preferences" style="font-size:13px">
+                <span class="material-icons">settings</span><br>Preferences
+                </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-8">
+      <div class="msg row ">
+        <div class="col-lg-12">
+          <div class="msg card">
+            <div class="msg-title text-left">
+              <h4>Messages </h4>
+            </div>
+            <div class="msgId ">
+              <div class="card mb-2">
+                <div class="media forum-item">
+                  <a href="#" data-toggle="collapse" data-target=".forum-content">
+                      <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="mr-3 rounded-circle" width="50" alt="User" />
+                    </a>
+                  <div class="media-body text-left">
+                    Username
+                    <p class="text-secondary">
+                      Last received Date
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="media forum-item">
+                  <a href="#" data-toggle="collapse" data-target=".forum-content">
+                      <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="mr-3 rounded-circle" width="50" alt="User" />
+                    </a>
+                  <div class="media-body text-left">
+                    Username
+                    <p class="text-secondary">
+                      Last received Date
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="media forum-item">
+                  <a href="#" data-toggle="collapse" data-target=".forum-content">
+                      <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="mr-3 rounded-circle" width="50" alt="User" />
+                    </a>
+                  <div class="media-body text-left">
+                    <h5>Coming soon...</h5>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="media forum-item">
+                  <a href="#" data-toggle="collapse" data-target=".forum-content">
+                      <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="mr-3 rounded-circle" width="50" alt="User" />
+                      </a>
+                  <div class="media-body text-left">
+                    Username
+                    <p class="text-secondary">
+                      Last received Date
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="media forum-item">
+                  <a href="#" data-toggle="collapse" data-target=".forum-content">
+                      <img src="https://bootdey.com/img/Content/avatar/avatar8.png" class="mr-3 rounded-circle" width="50" alt="User" />
+                      </a>
+                  <div class="media-body text-left">
+                    Username
+                    <p class="text-secondary">
+                      Last received Date
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="msg panel-footer text-center bg-white">
+              <a href="#" class="text-primary" data-toggle="modal" data-target="#chatModal">View all </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- Tabs navs -->
+      <div style="margin-top:50px;">
+        <ul class="nav nav-tabs nav-justified mb-3" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="All-tab" data-toggle="tab" href="#All" role="tab" aria-controls="All" aria-selected="true">All</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="nearMe-tab" data-toggle="tab" href="#nearMe" role="tab" aria-controls="nearMe" aria-selected="false">Near Me</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="latest-tab" data-toggle="tab" href="#latest" role="tab" aria-controls="latest" aria-selected="false">Latest</a>
+          </li>
+        </ul>
+
+        <!-- Tabs navs -->
+
+        <!-- Tabs content -->
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="All" role="tabpanel" aria-labelledby="All-tab">
+            <div class="row pro">
+              {% if me[0]['gender'] == 'M' %} {% for user in users %} {% if user.gender == 'F' %}
+              <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="profile-list profile-grid">
+                  <div class="profile-list-image">
+                    <img class="img-fluid" src="static/images/females/ifemale.png" alt="">
+                  </div>
+                  <div class="profile-list-details">
+                    <div class="profile-list-info">
+                      <div class="profile-list-title">
+                        <h5>
+                          <a href={{ url_for( 'userProfile', username=user.username) }}>
+                          {{ user.username }}  {{ user.age }}</a>
+                        </h5>
+                      </div>
+                      <div class="profile-list-option">
+                        <p class="text-secondary mb-1">{{ user.profession }} </p>
+                        <p class="text-muted font-size-sm">{{ user.state }}, {{ user.country }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endif %}{% endfor %} {% elif me[0]['gender'] == 'F' %} {% for user in users %} {% if user.gender == 'M' %}
+              <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="profile-list profile-grid">
+                  <div class="profile-list-image">
+                    <img class="img-fluid" src="static/images/males/imale.png" alt="">
+                  </div>
+                  <div class="profile-list-details">
+                    <div class="profile-list-info">
+                      <div class="profile-list-title">
+                        <h5><a href={{ url_for( 'userProfile', username=user.username) }}>
+                        {{ user.username }}  {{ user.age }}</a>
+                        </h5>
+                      </div>
+                      <div class="profile-list-option">
+                        <p class="text-secondary mb-1">{{ user.jobtitle }} </p>
+                        <p class="text-muted font-size-sm">{{ user.state }}, {{ user.country }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endif %}{% endfor %}{% endif %}
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="nearMe" role="tabpanel" aria-labelledby="nearMe-tab">
+            <div class="row pro">
+              {% if me[0]['gender'] == "M" %} {% for user in users %} {% if user.gender == "F" and user.city == me[0]['city'] %}
+              <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="profile-list profile-grid">
+                  <div class="profile-list-image">
+                    <img class="img-fluid" src="static/images/females/ifemale.png" alt="">
+                  </div>
+                  <div class="profile-list-details">
+                    <div class="profile-list-info">
+                      <div class="profile-list-title">
+                        <h5><a href={{ url_for( 'userProfile', username=user.username) }}>
+                        {{ user.username }}  {{ user.age }}</a>
+                        </h5>
+                      </div>
+                      <div class="profile-list-option">
+                        <p class="text-secondary mb-1">{{ user.jobtitle }}</p>
+                        <p class="text-muted font-size-sm">{{ user.city }}, {{ user.state }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endif %} {% endfor %} {% elif me[0]['gender'] == "F" %} {% for user in users %} {% if user.gender == "M" and user.city == me[0]['city'] %}
+              <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="profile-list profile-grid">
+                  <div class="profile-list-image">
+                    <img class="img-fluid" src="static/images/males/imale.png" alt="">
+                  </div>
+                  <div class="profile-list-details">
+                    <div class="profile-list-info">
+                      <div class="profile-list-title">
+                        <h5><a href={{ url_for( 'userProfile', username=user.username) }}>
+                        {{ user.username }}  {{ user.age }}</a>
+                        </h5>
+                      </div>
+                      <div class="profile-list-option">
+                        <p class="text-secondary mb-1">{{ user.jobtitle }}</p>
+                        <p class="text-muted font-size-sm">{{ user.city }}, {{ user.state }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endif %} {% endfor %} {% endif %}
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="latest" role="tabpanel" aria-labelledby="latest-tab">
+            <div class="row pro">
+              {% if me[0]['gender'] == "M" %} {% for user in users %} {% if user.gender == "F" and user.profage
+              <=6 %} <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="profile-list profile-grid">
+                  <div class="profile-list-image">
+                    <img class="img-fluid" src="static/images/females/ifemale.png" alt="">
+                  </div>
+                  <div class="profile-list-details">
+                    <div class="profile-list-info">
+                      <div class="profile-list-title">
+                        <h5><a href={{ url_for( 'userProfile', username=user.username) }}>
+                        {{ user.username }}  {{ user.age }}</a>
+                        </h5>
+                      </div>
+                      <div class="profile-list-option">
+                        <p class="text-secondary mb-1"> {{ user.jobtitle }}</p>
+                          <p class="text-muted font-size-sm">{{ user.state }}, {{ user.country }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            {% endif %} {% endfor %} {% elif me[0]['gender'] == "F" %} {% for user in users %} {% if user.gender == "M" and user.profage
+            <=6 %} <div class="col-sm-6 col-lg-4 mb-4">
+              <div class="profile-list profile-grid">
+                <div class="profile-list-image">
+                  <img class="img-fluid" src="static/images/males/imale.png" alt="">
+                </div>
+                <div class="profile-list-details">
+                  <div class="profile-list-info">
+                    <div class="profile-list-title">
+                      <h5><a href={{ url_for( 'userProfile', username=user.username) }}>
+                      {{ user.username }}  {{ user.age }}</a>
+                      </h5>
+                    </div>
+                    <div class="profile-list-option">
+                      <p class="text-secondary mb-1"> {{ user.jobtitle }}</p>
+                        <p class="text-muted font-size-sm">{{ user.state }}, {{ user.country }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+          {% endif %}{% endfor %} {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Tabs content -->
+</div>
+</div>
+</div>
+
+{% endblock %}

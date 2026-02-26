@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %} Report {% endblock %}
+
+{% block main %}
+
+<div class="col-12">
+    <div class="row">
+        <div class="col-md-12 register-form mx-auto">
+            <h4>Reason for reporting {{ username }}</h4>
+            <form action="/report/{{username}}" method="post">
+                {% for reason in reasons %}
+                <div class="form-check text-left">
+                    <input class="form-check-input" type="checkbox" name="{{reason}}" id="{{reason}}">
+                    <label class="form-check-label" for="{{reason}}">{{reason}}</label>
+                </div>
+                {% endfor %}
+                <p></p>
+                <h5 align="left">Comments:</h5>
+                <div class="form-group">
+                    <textarea class="form-control" name="explanation" style="height: 75px" required autocomplete="off"></textarea>
+                </div>
+                <div class="form-group" align="left">
+                    <button class="btn btn-primary" type="submit">Report</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

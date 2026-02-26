@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Messages
+{% endblock %}
+
+{% block main %}
+    <form action="/messages" method="post">
+        <div style="background-color: gold">
+            <h2 style="background-color: gold; color: brown">
+                Upgrade to Gold Membership
+            </h2>
+            <hr>
+            <table>
+                <tr>
+                    <td>
+                        <p>Select one of the packages and pay using the payment method of your choice</p>
+                    </td>
+                    {% for space in range(150) %}
+                        <td></td>
+                    {% endfor %}
+                    <td>
+                        <button class="btn btn-primary" style="color: white; background-color: orange" type="submit">Upgrade Now</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+{% endblock %}

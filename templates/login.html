@@ -1,0 +1,43 @@
+{% extends "layout.html" %} {% block title %} Log In {% endblock %} {% block main %}
+
+<div class="container login-container">
+    <div class="row">
+        <div class="col-md-6 login-form mx-auto">
+            <h4>Login</h4>
+            <form action="/login" method="post">
+                <div class="form-group">
+                    <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" name="password" id="password" placeholder="Password" type="password">
+                </div>
+                <div class="form-group" align="left">
+                    <input type="checkbox" id="showPassword" onclick="passwordShow()">
+                    <label for="showPassword">Show Password</label>
+                </div>
+                <div class="flex-container">
+                    <div style="flex-grow: 1 align-self: left">
+                        <a href="/forgotPassword">Forgot Password? </a>
+                    </div>
+                    <div style="flex-grow: 1 align-self: right">
+                        <button class="btn btnSubmit" type="submit">Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function passwordShow() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        }
+        else {
+            x.type = "password";
+        }
+    }
+</script>
+
+{% endblock %}

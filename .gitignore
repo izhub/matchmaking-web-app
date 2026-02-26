@@ -1,0 +1,16 @@
+# Environment variables
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+.venv/
+
+# Ignore real database
+matrimonial.db
+
+# Allow sample DB
+!sample_matrimonial.db

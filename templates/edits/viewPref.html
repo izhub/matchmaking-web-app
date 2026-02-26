@@ -1,0 +1,43 @@
+{% extends "shared/editlayout.html" %} {% block title %} Preference {% endblock %} {% block edit %}
+
+
+<div class="col-9">
+    <div class="row">
+        <div class="col-md-12 register-form mx-auto">
+            <h4> Preferences</h4>
+            <form action="/userPreference" method="post">
+
+                <div class="mt-3 d-flex justify-content-between">
+                    <h6><b>Profile Status</b></h6>
+                    <select class="form-control col-md-6" name="profileStatus">
+                        <option value="" selected disabled>Status</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+                <div class="mt-3 d-flex justify-content-between">
+                    <h6><b>Profile Photos</b></h6>
+                    <select class="form-control col-md-6" name="profilePhotos">
+                     <option value="" selected disabled>Options</option>
+                     <option value="show">Show</option>
+                     <option value="hide">Hide</option>
+                    </select>
+                </div>
+                <div class="mt-3 d-flex justify-content-between">
+                    <h6><b>Messaging</b></h6>
+                    <select class="form-control col-md-6" name="profileMsg">
+                     <option value="" selected disabled>Message</option>
+                     <option value="on">On</option>
+                     <option value="off">Off</option>
+                    </select>
+                </div>
+                <p></p>
+                <div class="text-left">
+                    <button class="btn btnSubmit" type="submit">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

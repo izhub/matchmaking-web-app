@@ -1,0 +1,34 @@
+{% extends "shared/editlayout.html" %} {% block title %} Blocked Users {% endblock %} {% block edit %}
+
+
+<div class="col-9">
+    <div class="row">
+        <div class="col-md-12 register-form mx-auto">
+            <h4> Blocked Members</h4>
+            <div class="row pro">
+                {% for user in blocked %}
+                <div class="col-sm-6 col-lg-4 mb-4">
+                    <div class="profile-list profile-grid">
+                        <div class="profile-list-image">
+                            {% if user.gender == 'M' %}
+                            <img class="img-fluid" src="/static/images/males/imale.png" alt="">
+                            {% elif user.gender == 'F' %}
+                            <img class="img-fluid" src="/static/images/females/ifemale.png" alt="">
+                            {% endif %}
+                        </div>
+                        <h5 align="center">{{ user.username }}</h5>
+                        <a href="{{ url_for('userUnblock', userID = user.userID) }}" style="color:#BC0631">
+                            <h5>UNBLOCK</h5>
+                        </a>
+                    </div>
+                </div>
+               {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+

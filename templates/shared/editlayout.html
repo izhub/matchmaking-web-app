@@ -1,0 +1,63 @@
+{% extends "layout.html" %} {% block main %}
+
+<div class="row">
+    <div class="col-3 menu">
+        <div>
+            <a href="#"><img src="/static/images/addpic.JPG" /></a>
+        </div>
+        <p></p>
+        <ul>
+            <a href="userPreference">
+                <li>Preferences</li>
+            </a>
+        </ul>
+        <div style="background-color: #d6d5d5; color: #33b5e5"><b>Edit My Profile</b></div>
+        <ul>
+            <a href="editProfile">
+                <li>Edit Profile</li>
+            </a>
+            <a href="editPartnerPreference">
+                <li>Edit Partner Preference</li>
+            </a>
+            <a href="editContact">
+                <li>Edit Contact</li>
+            </a>
+        </ul>
+        <div style=" background-color: #d6d5d5; color: #33b5e5"><b>Photos</b></div>
+        <ul>
+            <a href="myPhotos">
+                <li>Edit Photos</li>
+            </a>
+            <a href="photoAccess">
+                <li>Photo Access</li>
+            </a>
+        </ul>
+        <div style="background-color: #d6d5d5; color: #33b5e5"><b>Account & Security</b></div>
+        <ul>
+            <a href="changeUsername">
+                <li>Change Username</li>
+            </a>
+            <a href="changePassword">
+                <li>Change Password</li>
+            </a>
+            <a href="changeEmail">
+                <li>Change Email</li>
+            </a>
+            <a href="membershipHistory">
+                <li>Membership History</li>
+            </a>
+            <a href="blockedUsers">
+                <li>Blocked Users</li>
+            </a>
+        </ul>
+        <ul>
+            <a href="deleteProfile">
+                <li style="background-color: #000000; color: red; padding: 15px">Delete Profile</li>
+            </a>
+        </ul>
+    </div>
+
+    {% block edit %} {% endblock %}
+</div>
+
+{% endblock %}

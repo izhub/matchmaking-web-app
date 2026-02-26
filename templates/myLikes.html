@@ -1,0 +1,70 @@
+{% extends "layout.html" %} {% block title %} My Likes {% endblock %} {% block main %}
+<div style="margin-top:50px;">
+    <ul class="nav nav-tabs nav-justified mb-3" id="likedOrNot" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="youLiked-tab" data-toggle="tab" href="#youLiked" role="tab" aria-controls="youLiked" aria-selected="true">My Liked Profiles</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="others-tab" data-toggle="tab" href="#peopleWhoLikedMe" role="tab" aria-controls="others" aria-selected="false">People Who Liked Me</a>
+        </li>
+    </ul>
+</div>
+
+<div class="tab-content" id="likedOrNotContent">
+    <div class="tab-pane fade show active" id="youLiked" role="tabpanel" aria-labelledby="youLiked-tab">
+        <div class="row pro">
+            {% for user in iLiked %}
+            <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="profile-list profile-grid">
+                    <div class="profile-list-image">
+                        {% if user.gender == 'M' %}
+                        <img class="img-fluid" src="static/images/males/imale.png" alt="profile picture"> {% elif user.gender == 'F' %}
+                        <img class="img-fluid" src="static/images/females/ifemale.png" alt="profile picture"> {% endif %}
+                    </div>
+                    <div class="profile-list-details">
+                        <div class="profile-list-info">
+                            <div class="profile-list-title">
+                                <h5><a href="{{ url_for('userProfile', username = user.username) }}">
+                                   {{ user['username'] }}  {{ user.age }}</a>
+                                </h5>
+                            </div>
+                            <div class="profile-list-option">
+                                <span class="text-secondary mb-1">{{ user.state }}, {{ user.country }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="tab-pane fade" id="peopleWhoLikedMe" role="tabpanel" aria-labelledby="peopleWhoLikedYou-tab">
+        <div class="row pro">
+            {% for user in uLiked %}
+            <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="profile-list profile-grid">
+                    <div class="profile-list-image">
+                        {% if user.gender == 'M' %}
+                        <img class="img-fluid" src="static/images/males/imale.png" alt="profile picture"> {% elif user.gender == 'F' %}
+                        <img class="img-fluid" src="static/images/females/ifemale.png" alt="profile picture"> {% endif %}
+                    </div>
+                    <div class="profile-list-details">
+                        <div class="profile-list-info">
+                            <div class="profile-list-title">
+                                <h5><a href="{{ url_for('userProfile', username = user.username) }}">
+                                     {{ user.username }}  {{ user.age }}</a>
+                                </h5>
+                            </div>
+                            <div class="profile-list-option">
+                                <span class="text-secondary mb-1">{{ user.state }}, {{ user.country }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

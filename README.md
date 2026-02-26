@@ -23,11 +23,7 @@ MyMate is a Flask-based web application that allows users to create profiles and
     ```bash
     pip install -r requirements.txt
 
-3. Setup .env with your API key:
-    ```bash
-    API_KEY=your_real_api_key_here
-
-4. Use the sample database:
+3. Use the sample database:
     ```bash
     Mac/Linux:
       cp sample_matrimonial.db matrimonial.db
@@ -35,12 +31,12 @@ MyMate is a Flask-based web application that allows users to create profiles and
     Windows PowerShell:
       Copy-Item sample_matrimonial.db matrimonial.db
 
-5. Run the app:
+4. Run the app:
     
         flask run
 
 
-6. Test Users:
+5. Test Users:
     ```bash
     Female username: jane 
     Male username: john

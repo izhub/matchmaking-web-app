@@ -37,11 +37,6 @@ Session(app)
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///matrimonial.db")
 
-# Make sure API key is set 
-api_key = os.getenv("API_KEY")
-if not api_key:
-    raise RuntimeError("API_KEY not set")
-
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
